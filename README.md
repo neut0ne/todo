@@ -1,2 +1,2 @@
 # Todo
-Simple task manager to learn Go.
+Simple task manager with a BoltDB database.
