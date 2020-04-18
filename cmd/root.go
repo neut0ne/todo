@@ -1,4 +1,3 @@
-
 package cmd
 
 // This is the root command.
