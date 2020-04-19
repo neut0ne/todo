@@ -1,7 +1,7 @@
 package main
 
-import "github.com/neut0ne/todo/cmd"
+import "github.com/neut0ne/todo/cmdd"
 
 func main (){
-  cmd.RootCmd.Execute()
+  cmdd.RootCmd.Execute()
 }
