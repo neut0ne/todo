@@ -1,4 +1,4 @@
-package cmd
+package cmdd
 
 // This is the root command.
 
