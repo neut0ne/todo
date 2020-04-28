@@ -15,8 +15,8 @@ limitations under the License.
 */
 package main
 
-import "github.com/neut0ne/todo/cmdd"
+import "github.com/neut0ne/todo/cmd"
 
 func main() {
-	cmdd.RootCmd.Execute()
+	cmd.RootCmd.Execute()
 }
