@@ -3,6 +3,8 @@ package cmd
 import (
   "fmt"
   "strings"
+
+  "github.com/neut0ne/todo/db"
   "github.com/spf13/cobra"
 )
 
@@ -26,12 +28,17 @@ var addCmd = &cobra.Command{
     // But we rather want to skip the quotes, and can live with adding only one
     // task at a time, so we'll do this:
     task := strings.Join(args, " ")
+    _, err := db.CreateTask(task)
+    if err != nil {
+      fmt.Println("Something went wrong:", err.Error())
+      return
+    }
     fmt.Printf("Added \"%s\" to your task list. \n", task)
   },
 }
 
 // init will run before main. Good for setting up stuff before start.
-// Runs on package level vars and funcs. Might be less good for ... (-13.26)
+// Runs on package level vars and funcs.
 func init() {
   // And this worked without importing cmdd because we're already in that
   // package, so commands in files in the package is already available!
