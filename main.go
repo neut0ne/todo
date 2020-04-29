@@ -2,6 +2,8 @@ package main
 
 import (
   "path/filepath"
+  "fmt"
+  "os"
 
   "github.com/neut0ne/todo/db"
   "github.com/neut0ne/todo/cmd"
@@ -11,9 +13,13 @@ import (
 func main (){
   home, _ := homedir.Dir()
   dbPath := filepath.Join(home, "tasks.db")
-  err := db.Init(dbpath)
+  must(db.Init(dbPath))
+  must(cmd.RootCmd.Execute())
+}
+
+func must(err error) {
   if err != nil {
-    panic(err)
+    fmt.Println(err.Error())
+    os.Exit(1)
   }
-  cmd.RootCmd.Execute()
 }
