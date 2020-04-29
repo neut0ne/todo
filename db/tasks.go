@@ -48,7 +48,7 @@ func CreateTask(task string) (int, error) {
 }
 
 // Read all tasks in db.
-func Alltasks() ([]Task, error) {
+func AllTasks() ([]Task, error) {
   var tasks []Task
   err := db.View(func(tx *bolt.Tx) error {
     b := tx.Bucket(taskBucket)
@@ -70,7 +70,7 @@ func Alltasks() ([]Task, error) {
 
 // Delete a task
 func DeleteTask(key int) error {
-  return := db.Update(func(tx *bolt.Tx) error {
+  return db.Update(func(tx *bolt.Tx) error {
     b := tx.Bucket(taskBucket)
     return b.Delete(itob(key))
   })
