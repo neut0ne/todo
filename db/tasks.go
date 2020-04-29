@@ -68,6 +68,14 @@ func Alltasks() ([]Task, error) {
   return tasks, nil
 }
 
+// Delete a task
+func DeleteTask(key int) error {
+  return := db.Update(func(tx *bolt.Tx) error {
+    b := tx.Bucket(taskBucket)
+    return b.Delete(itob(key))
+  })
+}
+
 // Key converter integers to byteslices
 func itob(v int) []byte{
   b := make([]byte, 8)
