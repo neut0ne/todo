@@ -15,6 +15,8 @@ type Task struct {
   Value string
 }
 
+// Initiates bolt.db, updates db with new or existing bucket
+// Caution: Init is not init. The function is not package level.
 func Init(dbPath string) error {
   var err error
   db, err = bolt.Open(dbPath, 0600, &bolt.Options{Timeout: 1 * time.Second})
@@ -27,6 +29,7 @@ func Init(dbPath string) error {
   })
 }
 
+// Creates task and stores it as a byteslice bucket in bolt.db
 func CreateTask(task string) (int, error) {
   var id int
   err := db.Update(func(tx *bolt.Tx) error {
@@ -36,12 +39,35 @@ func CreateTask(task string) (int, error) {
     key := itob(int(id64))
     return b.Put(key, []byte(task))
   })
+  // this is a way to check if there is anything else than nil or the expected
+  // value. If err is not nil, err is returned.
   if err != nil {
     return -1, err
   }
   return id, nil
-  return 0, nil
 }
+
+// Read all tasks in db.
+func Alltasks() ([]Task, error) {
+  var tasks []Task
+  err := db.View(func(tx *bolt.Tx) error {
+    b := tx.Bucket(taskBucket)
+    c := b.Cursor()
+    for k, v := c.First(); k != nil; k, v = c.Next() {
+      tasks = append(tasks, Task{
+        Key:    btoi(k),
+        Value:  string(v),
+      })
+    }
+    // even if it's a read-only function, return *something*.
+    return nil
+  })
+  if err != nil {
+    return nil, err
+  }
+  return tasks, nil
+}
+
 // Key converter integers to byteslices
 func itob(v int) []byte{
   b := make([]byte, 8)
