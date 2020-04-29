@@ -5,6 +5,7 @@ import (
   "github.com/boltdb/bolt"
 )
 
+// buckets need to be populated with BYTESLICES.
 var taskBucket = []byte("tasks")
 var db *bolt.DB
 
@@ -19,6 +20,15 @@ func Init(dbPath string) error {
   if err != nil {
     return err
   }
+
+  // below fn is equal to writing:
+
+  // return db.Update(func(tx *bolt.Tx) error{
+  //   _, err := tx.CreateBucketIfNotExists(taskBucket)
+  //   return err
+  // })
+
+  // which is more common, but the below gives a better visual when learning.
   fn := func(tx *bolt.Tx) error {
     _, err := tx.CreateBucketIfNotExists(taskBucket)
     return err
