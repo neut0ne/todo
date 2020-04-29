@@ -2,6 +2,7 @@ package db
 
 import (
   "time"
+  "encoding/binary"
   "github.com/boltdb/bolt"
 )
 
@@ -20,19 +21,34 @@ func Init(dbPath string) error {
   if err != nil {
     return err
   }
-
-  // below fn is equal to writing:
-
-  // return db.Update(func(tx *bolt.Tx) error{
-  //   _, err := tx.CreateBucketIfNotExists(taskBucket)
-  //   return err
-  // })
-
-  // which is more common, but the below gives a better visual when learning.
-  fn := func(tx *bolt.Tx) error {
+  return db.Update(func(tx *bolt.Tx) error{
     _, err := tx.CreateBucketIfNotExists(taskBucket)
     return err
-  }
-
-  return db.Update(fn)
+  })
 }
+
+func CreateTask(task string) (int, error) {
+  var id int
+  err := db.Update(func(tx *bolt.Tx) error {
+    b := tx.Bucket(taskBucket)
+    id64, _ := b.NextSequence()
+    id = int(id64)
+    key := itob(int(id64))
+    return b.Put(key, []byte(task))
+  })
+  if err != nil {
+    return -1, err
+  }
+  return id, nil
+  return 0, nil
+}
+// Key converter integers to byteslices
+func itob(v int) []byte{
+  b := make([]byte, 8)
+  binary.BigEndian.PutUint64(b, uint64(v))
+  return b
+}
+// Key converter byteslices to integers
+func btoi(b []byte) int {
+  return int(binary.BigEndian.Uint64(b))
+  }
