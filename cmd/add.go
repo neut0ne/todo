@@ -4,7 +4,6 @@ import (
   "fmt"
   "strings"
   "github.com/spf13/cobra"
-  "strings"
 )
 
 var addCmd = &cobra.Command{
