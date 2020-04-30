@@ -7,7 +7,7 @@ For linux: https://app.box.com/s/uybbovpq0gbgzvez64w4b3llj2xqz4rm<br>
 For mac: https://app.box.com/s/xff6p22pe6lnd1nysxzcvn96h6srowu1<br>
 For windows: https://app.box.com/s/19w6jtp5pw7zyxorfqmr1tewghcoip7n<br>
 
-Unzip the archive. In a terminal, enter the folder and *run todo.exe.*<br>
+Unzip the archive. In a terminal, enter the folder and *run todo.exe:*<br>
 
 On windows:<br>
 `start todo.exe`<br>
