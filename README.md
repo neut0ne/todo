@@ -14,5 +14,5 @@ On windows:<br>
 `todo`<br>
 
 On linux and mac:<br>
-`sudo chmod +x todo.exe`<br>
+`sudo chmod +x todo.[suffix]`
 `todo`<br>
