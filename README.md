@@ -1,7 +1,7 @@
 # Todo
 Simple task manager with a BoltDB database.
 
-Todo is terminal/cmd based. As for now, the program will only run from its' own folder. The program and db is entirely written in go, but you don't need to install go to run the program. Download it and try it out!
+Todo is terminal/cmd based. As for now, the program will only run from its' own folder unless you add it to your path. The program and db is entirely written in go, but you don't need to install go to run the program. Download it and try it out!
 
 For linux: https://app.box.com/s/uybbovpq0gbgzvez64w4b3llj2xqz4rm<br>
 For mac: https://app.box.com/s/xff6p22pe6lnd1nysxzcvn96h6srowu1<br>
