@@ -1,4 +1,4 @@
-# Todo
+# Todo 📝
 Simple task manager with a BoltDB database.
 
 Todo is terminal/cmd based. As for now, the program will only run from its' own folder unless you add it to your path. The program and db is entirely written in go, but you don't need to install go to run the program. Download it and try it out!
